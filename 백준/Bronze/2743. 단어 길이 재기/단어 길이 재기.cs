@@ -1,11 +1,9 @@
 using System;
-
 class Program
 {
    
     static void Main()
     {
-        char[] c = Console.ReadLine().ToCharArray();
-        Console.WriteLine(c.Length);
+        Console.WriteLine(Console.ReadLine().ToCharArray().Length);
     }
 }
