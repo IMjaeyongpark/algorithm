@@ -20,7 +20,7 @@ class Program
             ids[i].age = int.Parse(s[0]);
             ids[i].name = s[1];
         }
-        var result = ids.OrderBy(i => i.age).ThenByDescending(i => i.age).Select(i => i);
+        var result = ids.OrderBy(i => i.age);
         foreach(var a in result)
         {
             sb.Append(a.age + " " + a.name + "\n");
