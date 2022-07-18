@@ -4,6 +4,8 @@ using System.Text;
 
 class Program
 {
+    static List<Use> list = new List<Use>();
+    
     struct Use
     {
         public int start;
@@ -20,12 +22,10 @@ class Program
         }
         return start;
     }
-
-    static List<Use> list = new List<Use>();
+    
     static void Main()
     {
         StringBuilder sb = new StringBuilder();
-        List<int> count = new List<int>();
         int N = int.Parse(Console.ReadLine());
         for (int i = 0; i < N; i++)
         {
@@ -37,10 +37,12 @@ class Program
             list[i] = temp;
         }
         list = list.OrderBy(x => x.start).ToList<Use>();
+        int pc = 0;
         while (list.Count > 0)
         {
+            pc++;
+            int count = 1;
             int idx = 0;
-            count.Add(1);
             int end = list[0].end;
             list.RemoveAt(0);
             while (idx<list.Count)
@@ -49,13 +51,13 @@ class Program
                 if (idx < list.Count && list[idx].start >= end)
                 {
                     end = list[idx].end;
-                    count[count.Count - 1]++;
+                    count++;
                     list.RemoveAt(idx);
                 }
             }
-            sb.Append(count[count.Count - 1] + " ");
+            sb.Append(count + " ");
         }
-        Console.WriteLine(count.Count);
+        Console.WriteLine(pc);
         Console.WriteLine(sb.ToString());
     }
 }
