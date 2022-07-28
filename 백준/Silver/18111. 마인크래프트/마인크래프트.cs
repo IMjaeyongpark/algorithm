@@ -12,6 +12,7 @@ class Program
         int second = int.MaxValue;
         int H = 0;
         int min = int.MaxValue;
+        int max = int.MinValue;
         for(int i = 0; i < y; i++)
         {
             string[] s1 = Console.ReadLine().Split();
@@ -19,9 +20,11 @@ class Program
             {
                 int a = int.Parse(s1[j]);
                 if (a < min) min = a;
+                if (a > max) max = a;
                 grand[j, i] = a;
             }
         }
+
 
         int bcnt = 0;
         for (int k = min; true; k++)
@@ -44,7 +47,7 @@ class Program
                     }
                 }
             }
-            if (bcnt > block) break;
+            if (bcnt > block || max < k) break;
             if (second >= second2)
             {
                 second = second2;
