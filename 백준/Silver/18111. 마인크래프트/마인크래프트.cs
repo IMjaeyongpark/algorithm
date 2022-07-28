@@ -11,7 +11,6 @@ class Program
         int[,] grand = new int[x, y];
         int second = int.MaxValue;
         int H = 0;
-        int max = 0;
         int min = int.MaxValue;
         for(int i = 0; i < y; i++)
         {
@@ -19,12 +18,10 @@ class Program
             for(int j = 0; j < x; j++)
             {
                 int a = int.Parse(s1[j]);
-                if (a > max) max = a;
                 if (a < min) min = a;
                 grand[j, i] = a;
             }
         }
-
 
         int bcnt = 0;
         for (int k = min; true; k++)
