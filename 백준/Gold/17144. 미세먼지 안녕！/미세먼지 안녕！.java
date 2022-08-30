@@ -7,16 +7,6 @@ import java.util.PriorityQueue;
 import java.util.Collections;
 import java.util.ArrayList;
 
-class lo {
-	int x;
-	int y;
-
-	lo(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-}
-
 public class Main {
 	public static void main(String[] ags) {
 		var sc = new Scanner(System.in);
