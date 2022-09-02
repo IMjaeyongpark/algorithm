@@ -1,87 +1,46 @@
 import java.lang.reflect.Array;
 import java.util.*;
-import java.util.Scanner;
-import java.util.Queue;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Collections;
-import java.util.ArrayList;
-
-class dis implements Comparable<dis> {
-	int x;
-	int t;
-
-	dis(int x, int t) {
-		this.x = x;
-		this.t = t;
-	}
-
-	public int gett() {
-		return this.t;
-	}
-
-	@Override
-	public int compareTo(dis dis) {
-
-		if (this.t > dis.gett())
-			return 1;
-		else if (this.t < dis.gett())
-			return -1;
-		return 0;
-	}
-}
 
 public class Main {
-	static ArrayList<dis>[] list;
-	static int N;
-	static StringBuilder sb = new StringBuilder();
 	static private final int INF = 100_000_000;
-
-	static void dijkstra(int x) {
-		var pq = new PriorityQueue<dis>();
-		var time = new int[N + 1];
-		Arrays.fill(time, INF);
-		time[x] = 0;
-		var visit = new boolean[N + 1];
-		pq.add(new dis(x, 0));
-		while (!pq.isEmpty()) {
-			var cur = pq.poll();
-			if (!visit[cur.x]) {
-				for (var tmp : list[cur.x]) {
-					if (time[tmp.x] > time[cur.x] + tmp.t) {
-						time[tmp.x] = time[cur.x] + tmp.t;
-						pq.add(new dis(tmp.x, time[tmp.x]));
-					}
-				}
-			}
-			visit[cur.x] = true;
-		}
-		for (int i = 1; i < N + 1; i++) {
-			if (time[i] == INF)
-				sb.append(0 + " ");
-			else
-				sb.append(time[i] + " ");
-		}
-		sb.append("\n");
-	}
 
 	public static void main(String[] ags) {
 		var sc = new Scanner(System.in);
-		int M;
+		var sb = new StringBuilder();
+		int N, M;
 		N = sc.nextInt();
 		M = sc.nextInt();
-		list = new ArrayList[N + 1];
-		for (int i = 1; i < N + 1; i++)
-			list[i] = new ArrayList<dis>();
+		int[][] price = new int[N + 1][N + 1];
+		for (int i = 1; i < N + 1; i++) {
+			Arrays.fill(price[i], INF);
+			price[i][i] = 0;
+		}
 		for (int i = 0; i < M; i++) {
 			int x, y, t;
 			x = sc.nextInt();
 			y = sc.nextInt();
 			t = sc.nextInt();
-			list[x].add(new dis(y, t));
+			if (price[x][y] > t)
+				price[x][y] = t;
 		}
-		for (int i = 1; i < N + 1; i++)
-			dijkstra(i);
+		for (int k = 1; k < N + 1; k++) {
+			for (int i = 1; i < N + 1; i++) {
+				for (int j = 1; j < N + 1; j++) {
+					if (price[i][j] > price[i][k] + price[k][j]) {
+						price[i][j] = price[i][k] + price[k][j];
+					}
+				}
+			}
+		}
+		for (int i = 1; i < N + 1; i++) {
+			for (int j = 1; j < N + 1; j++) {
+				if (price[i][j] == INF)
+					sb.append(0 + " ");
+				else
+					sb.append(price[i][j] + " ");
+			}
+			sb.append("\n");
+		}
 		System.out.print(sb);
 	}
 }
