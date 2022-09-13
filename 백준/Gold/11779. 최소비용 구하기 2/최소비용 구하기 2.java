@@ -10,17 +10,10 @@ import java.util.ArrayList;
 class dis implements Comparable<dis> {
 	int x;
 	int t;
-	ArrayList<Integer> route = new ArrayList<Integer>();
 
 	dis(int x, int t) {
 		this.x = x;
 		this.t = t;
-	}
-
-	dis(int x, int t, ArrayList<Integer> route) {
-		this.x = x;
-		this.t = t;
-		this.route = route;
 	}
 
 	public int gett() {
@@ -49,24 +42,31 @@ public class Main {
 		var time = new int[N + 1];
 		Arrays.fill(time, INF);
 		var temp = new dis(start, 0);
-		temp.route.add(start);
+		var route = new int[N + 1];
 		pq.add(temp);
 		time[start] = 0;
 		while (!pq.isEmpty()) {
 			var tmp = pq.poll();
 			if (tmp.x == end) {
-				System.out.println(tmp.t + "\n" + tmp.route.size());
-				for (var a : tmp.route)
-					System.out.print(a + " ");
+				Stack<Integer> r = new Stack<Integer>();
+				System.out.println(tmp.t);
+				int t = end;
+				while (t != 0) {
+					r.add(t);
+					t = route[t];
+				}
+				System.out.println(r.size());
+				while (!r.empty()) {
+					System.out.print(r.pop() + " ");
+				}
 				return;
 			}
 
 			for (var item : list[tmp.x]) {
 				if (time[item.x] > time[tmp.x] + item.t) {
 					time[item.x] = time[tmp.x] + item.t;
-					temp = new dis(item.x, time[item.x],(ArrayList<Integer>)tmp.route.clone());
-					temp.route.add(item.x);
-					pq.add(temp);
+					route[item.x] = tmp.x;
+					pq.add(new dis(item.x,time[item.x]));
 				}
 			}
 		}
