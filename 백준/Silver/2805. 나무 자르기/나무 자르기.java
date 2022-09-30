@@ -4,7 +4,7 @@ public class Main {
 	static int N, M;
 	static int[] length;
 	static int max = 0;
-	static long sol = 0;
+	static int sol = 0;
 
 	static void search(int start, int end) {
 		int mid = (start + end) / 2;
