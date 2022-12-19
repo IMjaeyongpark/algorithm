@@ -12,7 +12,7 @@ class Solution {
             }
             else {
                 for(i in cur..number.size - 1){
-              Bt(cnt+1,sum+number[i],i+1)      
+                    Bt(cnt+1,sum+number[i],i+1)      
                 }
             }
         }
