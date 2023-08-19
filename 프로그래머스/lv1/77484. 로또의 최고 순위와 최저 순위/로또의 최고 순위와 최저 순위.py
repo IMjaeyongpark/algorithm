@@ -1,29 +1,18 @@
 def solution(lottos, win_nums):
     
+    z = lottos.count(0)
     c = 0
-    z = 0
-    for n in lottos:
-        if n == 0:
-            z+=1
-        else:
-            for w in win_nums:
-                if w == n:
-                    c+=1
-                    break
     
+    for n in lottos:
+        if n in win_nums:
+            c += 1
     answer = []
-    if (c+z)<=1:
-        answer.append(6)
-        answer.append(6)
-        return answer
+    if z+c <=1:
+        return [6,6]
     else:
-        answer.append(7-c-z)
+        answer.append(7-z-c)
     
     if c <=1:
-        answer.append(6)
+        return [answer[0],6]
     else:
-        answer.append(7-c)
-    
-    return answer
-        
-        
+        return [answer[0],7-c]
