@@ -1,5 +1,4 @@
 def solution(wallpaper):
-    a = [[] for _ in range(len(wallpaper))]
     x = []
     y = []
     for i in range(len(wallpaper)):
@@ -10,4 +9,4 @@ def solution(wallpaper):
 
     x.sort()
     y.sort()
-    return [y[0], x[0], y.pop() + 1, x.pop() + 1]
+    return [min(y), min(x), max(y) + 1, max(x) + 1]
