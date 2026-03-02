@@ -7,7 +7,7 @@ class Solution {
         val plusServer: Queue<Int> = LinkedList() //증설된 서버 수
         val time: Queue<Int> = LinkedList() //추가된 서버의 유효 시간
         
-        for(i in 0..players.size - 1){
+        for(i in 0 until players.size){
             //유효시간이 지난 서버 반납
             if(time.peek() == i){
                 time.poll()
